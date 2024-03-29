@@ -1,0 +1,38 @@
+//// ------------------------------------------------------
+//// THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+//// ------------------------------------------------------
+
+Table User {
+  id Int [pk, increment]
+  name String [not null]
+  lastname String [not null]
+  role String [not null]
+  email String [not null]
+  password String [not null]
+  confirmed String [not null]
+  products Product [not null]
+  createdAt DateTime [default: `now()`, not null]
+}
+
+Table Product {
+  id Int [pk, increment]
+  name String [not null]
+  description String [not null]
+  price Float [not null]
+  image String [not null]
+  categoryId Int [not null]
+  category Category [not null]
+  userId Int [not null]
+  user User [not null]
+  createdAt DateTime [default: `now()`, not null]
+}
+
+Table Category {
+  id Int [pk, increment]
+  name String [not null]
+  products Product [not null]
+}
+
+Ref: Product.categoryId > Category.id
+
+Ref: Product.userId > User.id
