@@ -2,17 +2,26 @@ export const navbarRoutes = [
     {
         href: '/dashboard',
         text: "Dashboard",
+        isProtected: true,
     },
     {
         href: '/auth/login',
-        text: "Login"
+        text: "Login",
+        isProtected: false,
     },
     {
         href: '/auth/register',
-        text: "Register"
+        text: "Register",
+        isProtected: false,
     },
     {
         href: '/dashboard/profile',
-        text: "Profile"
+        text: "Profile",
+        isProtected: true,
+    },
+    {
+        href: '/404',
+        text: "Not Found",
+        isProtected: false,
     }
-]
+];
