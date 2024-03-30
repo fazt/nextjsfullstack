@@ -1,4 +1,9 @@
-import { Button, Card, Input, Label } from "@/components/ui";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Login",
+  description: "Login page",
+}
 
 function LoginPage() {
   return <div>LoginPage</div>;

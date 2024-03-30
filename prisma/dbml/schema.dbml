@@ -20,19 +20,21 @@ Table Product {
   description String [not null]
   price Float [not null]
   image String [not null]
-  categoryId Int [not null]
-  category Category [not null]
-  userId Int [not null]
-  user User [not null]
+  categoryId Int
+  category Category
+  authorId Int
+  author User
   createdAt DateTime [default: `now()`, not null]
 }
 
 Table Category {
   id Int [pk, increment]
   name String [not null]
+  description String [not null]
+  published Boolean [not null]
   products Product [not null]
 }
 
 Ref: Product.categoryId > Category.id
 
-Ref: Product.userId > User.id
+Ref: Product.authorId > User.id

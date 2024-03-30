@@ -18,7 +18,7 @@ generator dbml {
 }
 
 model User {
-  id       Int      @id @default(autoincrement())
+  id       Int    @id @default(autoincrement())
   name     String
   lastname String
   role     String
@@ -33,24 +33,26 @@ model User {
 }
 
 model Product {
-  id          Int      @id @default(autoincrement())
+  id          Int    @id @default(autoincrement())
   name        String
   description String
   price       Float
   image       String
 
-  categoryId  Int
-  category  Category @relation(fields: [categoryId], references: [id])
+  categoryId Int?
+  category   Category? @relation(fields: [categoryId], references: [id])
 
-  userId      Int
-  user        User @relation(fields: [userId], references: [id])
+  authorId Int?
+  author   User? @relation(fields: [authorId], references: [id])
 
-  createdAt   DateTime @default(now())
+  createdAt DateTime @default(now())
 }
 
 model Category {
-  id          Int      @id @default(autoincrement())
+  id          Int     @id @default(autoincrement())
   name        String
+  description String
+  published   Boolean
 
-  products   Product[]
+  products Product[]
 }
