@@ -1,6 +1,8 @@
 function DashboadPage() {
   return (
-    <div>DashboadPage</div>
+    <div>
+      DashboadPage
+    </div>
   )
 }
 export default DashboadPage
