@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { homeRoutes } from "@/routes/homeRouter";
 import Image from 'next/image'
+import { homeRoutes } from "@/routes/homeRouter";
 
 function Navbar() {
 
