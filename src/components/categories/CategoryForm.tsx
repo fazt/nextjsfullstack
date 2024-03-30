@@ -8,7 +8,6 @@ import { createCategorySchema } from "@/schemas/categorySchema";
 function CategoryForm() {
   const {
     register,
-    watch,
     handleSubmit,
     formState: { errors },
   } = useForm({
@@ -16,18 +15,13 @@ function CategoryForm() {
   });
 
   const onSubmit = handleSubmit(async (data) => {
-    console.log(data);
-
-    const res = await fetch("/api/categories", {
+    await fetch("/api/categories", {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
         "Content-Type": "application/json",
       },
     });
-
-    const category = await res.json();
-    console.log(category);
   });
 
   return (
