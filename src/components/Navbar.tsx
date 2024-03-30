@@ -7,7 +7,7 @@ function Navbar() {
       <ul>
         {navbarRoutes.map(({ href, text }) => (
           <li key={href}>
-            <Link href={href}>{text}</Link>
+            <Link href={href} passHref>{text}</Link>
           </li>
         ))}
       </ul>
