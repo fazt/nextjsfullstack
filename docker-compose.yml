@@ -4,8 +4,8 @@ services:
     image: postgres
     restart: always
     environment:
-      POSTGRES_USER: fazt
-      POSTGRES_PASSWORD: faztpassword
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: userpassword
       POSTGRES_DB: nextfulldb
     ports:
       - 5432:5432
