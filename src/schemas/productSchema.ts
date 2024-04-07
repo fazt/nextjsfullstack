@@ -12,12 +12,13 @@ export const createProductSchema = z.object({
       invalid_type_error: "La descripción debe ser un texto",
     })
     .optional(),
-  price: z.string().refine(
-    (value) => {
-      return !isNaN(parseFloat(value));
-    },
-    { message: "El precio debe ser un número" }
-  ),
+  price: z
+    .number({
+      invalid_type_error: "El precio debe ser un número",
+    })
+    .min(1, {
+      message: "El precio debe ser mayor a 0",
+    }),
   image: z.string().url().optional(),
   // categoryId
   // authord

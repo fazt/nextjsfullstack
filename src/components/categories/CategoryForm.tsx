@@ -10,18 +10,22 @@ function CategoryForm() {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm({
     resolver: zodResolver(createCategorySchema),
   });
 
   const onSubmit = handleSubmit(async (data) => {
-    await fetch("/api/categories", {
+    const res = await fetch("/api/categories", {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
         "Content-Type": "application/json",
       },
     });
+    if(res.status === 201){
+      reset();
+    }
   });
 
   return (
@@ -29,14 +33,26 @@ function CategoryForm() {
       <Label>Nombre de la Categoría</Label>
       <Input {...register("name")} />
       {errors.name?.message && (
-        <p className="text-red-500">{errors.name?.message}</p>
+        <span className="text-red-500 block text-sm">
+          {errors.name.message.toString()}
+        </span>
       )}
 
       <Label>Descripción de la Categoría</Label>
       <Input {...register("description")} />
+      {errors.description?.message && (
+        <span className="text-red-500 block text-sm">
+          {errors.description.message.toString()}
+        </span>
+      )}
 
       <Label>Publicado</Label>
       <Input type="checkbox" {...register("published")} />
+      {errors.published?.message && (
+        <span className="text-red-500 block text-sm">
+          {errors.published.message.toString()}
+        </span>
+      )}
 
       <Button className="block mt-2">Crear Categoría</Button>
     </form>

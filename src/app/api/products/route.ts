@@ -12,5 +12,5 @@ export async function POST(request: Request) {
       // categoryId: data.categoryId,
     },
   });
-  return NextResponse.json(newProduct);
+  return NextResponse.json(newProduct, { status: 201 });
 }

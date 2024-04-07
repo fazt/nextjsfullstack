@@ -9,6 +9,7 @@ function ProductPage() {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm({
     resolver: zodResolver(createProductSchema),
   });
@@ -23,6 +24,9 @@ function ProductPage() {
     });
     const product = await res.json();
     console.log(product);
+    if(res.status === 201){
+      reset();
+    }
   });
 
   return (
@@ -30,18 +34,46 @@ function ProductPage() {
       <form onSubmit={onSubmit}>
         <Label>Nombre del Producto</Label>
         <Input {...register("name")} />
+        {errors.name && errors.name.message && (
+          <span className="text-red-500 block text-sm">
+            {errors.name.message.toString()}
+          </span>
+        )}
 
         <Label>Descripción</Label>
         <Input {...register("description")} />
+        {errors.description && errors.description.message && (
+          <span className="text-red-500 block text-sm">
+            {errors.description.message.toString()}
+          </span>
+        )}
 
         <Label>Precio</Label>
-        <Input {...register("price")} type="number" defaultValue={0} />
+        <Input
+          {...register("price", { valueAsNumber: true })}
+          defaultValue={0}
+        />
+        {errors.price && errors.price.message && (
+          <span className="text-red-500 block text-sm">
+            {errors.price.message.toString()}
+          </span>
+        )}
 
         <Label>Imagen</Label>
         <Input {...register("image")} />
+        {errors.image && errors.image.message && (
+          <span className="text-red-500 block text-sm">
+            {errors.image.message.toString()}
+          </span>
+        )}
 
         <Label>Categoría</Label>
         <Input {...register("category")} />
+        {errors.category && errors.category.message && (
+          <span className="text-red-500 block text-sm">
+            {errors.category.message.toString()}
+          </span>
+        )}
 
         <Button className="block mt-2">Crear Producto</Button>
       </form>
