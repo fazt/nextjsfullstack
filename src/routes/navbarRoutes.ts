@@ -14,5 +14,13 @@ export const navbarRoutes = [
     {
         href: '/dashboard/profile',
         text: "Profile"
+    },
+    {
+        href: '/dashboard/products/new',
+        text: "Crear Productos"
+    },
+    {
+        href: '/dashboard/categories/new',
+        text: "Crea Categoria"
     }
 ]

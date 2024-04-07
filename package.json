@@ -10,11 +10,14 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.3.4",
     "@prisma/client": "^5.11.0",
     "next": "14.1.4",
     "react": "^18",
     "react-dom": "^18",
-    "tailwind-merge": "^2.2.2"
+    "react-hook-form": "^7.51.2",
+    "tailwind-merge": "^2.2.2",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@types/node": "^20",
