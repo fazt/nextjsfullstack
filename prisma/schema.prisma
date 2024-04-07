@@ -1,11 +1,64 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
+// // This is your Prisma schema file,
+// // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+// // Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
+// generator client {
+//   provider = "prisma-client-js"
+// }
+
+// datasource db {
+//   provider = "postgresql"
+//   url      = env("DATABASE_URL")
+// }
+
+// generator dbml {
+//   provider = "prisma-dbml-generator"
+// }
+
+// model User {
+//   id       Int    @id @default(autoincrement())
+//   name     String
+//   lastname String
+//   role     String
+//   email    String
+//   password String
+
+//   confirmed String
+
+//   products Product[]
+
+//   createdAt DateTime @default(now())
+// }
+
+// model Product {
+//   id          Int    @id @default(autoincrement())
+//   name        String
+//   description String
+//   price       Float
+//   image       String
+
+//   categoryId Int?
+//   category   Category? @relation(fields: [categoryId], references: [id])
+
+//   authorId Int?
+//   author   User? @relation(fields: [authorId], references: [id])
+
+//   createdAt DateTime @default(now())
+// }
+
+// model Category {
+//   id          Int     @id @default(autoincrement())
+//   name        String
+//   description String
+//   published   Boolean
+
+//   products Product[]
+// }
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
 }
 
 datasource db {
@@ -13,46 +66,39 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-generator dbml {
-  provider = "prisma-dbml-generator"
+model User {
+  id              Int       @id @default(autoincrement())
+  name            String
+  last_name       String
+  email           String    @unique
+  password        String
+  confirmed_email Boolean?  @default(false)
+  role            String?   @default("user")
+  created_at      DateTime  @default(now())
+  products        Product[]
 }
 
-model User {
-  id       Int    @id @default(autoincrement())
-  name     String
-  lastname String
-  role     String
-  email    String
-  password String
-
-  confirmed String
-
-  products Product[]
-
-  createdAt DateTime @default(now())
+model Category {
+  id          Int       @id @default(autoincrement())
+  name        String
+  description String
+  created_at  DateTime  @default(now())
+  products    Product[]
 }
 
 model Product {
-  id          Int    @id @default(autoincrement())
+  id          Int     @id @default(autoincrement())
   name        String
-  description String
   price       Float
-  image       String
+  description String?
+  stock       Int?    @default(0)
+  image       String?
 
   categoryId Int?
   category   Category? @relation(fields: [categoryId], references: [id])
 
-  authorId Int?
-  author   User? @relation(fields: [authorId], references: [id])
+  authorId Int
+  author   User @relation(fields: [authorId], references: [id])
 
-  createdAt DateTime @default(now())
-}
-
-model Category {
-  id          Int     @id @default(autoincrement())
-  name        String
-  description String
-  published   Boolean
-
-  products Product[]
+  created_at DateTime @default(now())
 }

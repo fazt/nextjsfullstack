@@ -3,6 +3,8 @@ import { Input, Label, Button } from "@/components/ui";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createProductSchema } from "@/schemas/productSchema";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 function ProductPage() {
   const {
@@ -12,6 +14,7 @@ function ProductPage() {
   } = useForm({
     resolver: zodResolver(createProductSchema),
   });
+  const router = useRouter();
 
   const onSubmit = handleSubmit(async (data) => {
     const res = await fetch("/api/products", {
@@ -23,6 +26,11 @@ function ProductPage() {
     });
     const product = await res.json();
     console.log(product);
+
+    router.push("/dashboard/products");
+    router.refresh();
+
+    toast.success("Producto creado");
   });
 
   return (

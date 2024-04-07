@@ -1,15 +1,11 @@
-import { Button, Card, Input, Label } from "@/components/ui";
+import RegisterForm from "@/components/auth/RegisterForm";
 
 function RegisterPage() {
   return (
-    <div>
-      <h1>Register</h1>
-
-      <Button>Boton</Button>
-      <Button>Boton</Button>
-      <Button>Boton</Button>
-      <Button>Boton</Button>
+    <div className="flex justify-center h-screen items-center">
+      <RegisterForm />
     </div>
   );
 }
+
 export default RegisterPage;
