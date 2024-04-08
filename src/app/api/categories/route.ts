@@ -12,5 +12,5 @@ export async function POST(request: Request) {
     },
   });
 
-  return NextResponse.json("Producto creado", { status: 201 });
+  return NextResponse.json("Producto creado");
 }
