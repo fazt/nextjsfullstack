@@ -93,6 +93,7 @@ model Product {
   description String?
   stock       Int?    @default(0)
   image       String?
+  slug        String?  @unique @default(cuid())
 
   categoryId Int?
   category   Category? @relation(fields: [categoryId], references: [id])

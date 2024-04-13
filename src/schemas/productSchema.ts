@@ -19,6 +19,12 @@ export const createProductSchema = z.object({
     { message: "El precio debe ser un número" }
   ),
   image: z.string().url().optional(),
+  slug: z
+    .string()
+    .min(1, {
+      message: "El slug debe tener al menos 1 caracter",
+    })
+    .max(255),
   // categoryId
   // authord
 });

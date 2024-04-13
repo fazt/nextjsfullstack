@@ -1,37 +1,49 @@
+import { FolderIcon, UsersIcon } from "@heroicons/react/24/solid";
+
 export const navbarRoutes = [
   {
-    href: "/dashboard",
-    text: "Dashboard",
-    auth: true,
+    href: "/products",
+    text: "Products",
   },
   {
     href: "/auth/login",
     text: "Login",
-    auth: false,
   },
   {
     href: "/auth/register",
     text: "Register",
-    auth: false,
+  },
+];
+
+export const dashboardRoutes = [
+  {
+    href: "/dashboard",
+    text: "Dashboard",
+    icon: FolderIcon,
   },
   {
     href: "/dashboard/profile",
     text: "Profile",
-    auth: true,
+    icon: FolderIcon,
   },
   {
     href: "/dashboard/products",
     text: "Productos",
-    auth: true,
+    icon: FolderIcon,
   },
   {
     href: "/dashboard/products/new",
     text: "Crear Productos",
-    auth: true,
+    icon: FolderIcon,
   },
   {
     href: "/dashboard/categories/new",
     text: "Crea Categoria",
-    auth: true,
+    icon: FolderIcon,
+  },
+  {
+    href: "/dashboard/users",
+    text: "Users",
+    icon: UsersIcon,
   },
 ];

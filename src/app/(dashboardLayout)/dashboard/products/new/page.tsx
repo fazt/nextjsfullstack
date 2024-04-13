@@ -1,5 +1,5 @@
 "use client";
-import { Input, Label, Button } from "@/components/ui";
+import { Input, Label, Button, Card } from "@/components/ui";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createProductSchema } from "@/schemas/productSchema";
@@ -34,7 +34,7 @@ function ProductPage() {
   });
 
   return (
-    <div>
+    <Card>
       <form onSubmit={onSubmit}>
         <Label>Nombre del Producto</Label>
         <Input {...register("name")} />
@@ -51,9 +51,12 @@ function ProductPage() {
         <Label>Categoría</Label>
         <Input {...register("category")} />
 
+        <Label>Slug</Label>
+        <Input {...register("slug")} />
+
         <Button className="block mt-2">Crear Producto</Button>
       </form>
-    </div>
+    </Card>
   );
 }
 
