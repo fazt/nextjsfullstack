@@ -1,5 +1,6 @@
 import CredentialsProvider from "next-auth/providers/credentials";
 import prisma from "@/libs/prisma";
+import Prisma from "@prisma/client";
 import bcrypt from "bcrypt";
 import { AuthOptions } from "next-auth";
 
@@ -7,7 +8,7 @@ export const authOptions: AuthOptions = {
   providers: [
     CredentialsProvider({
       credentials: {},
-      async authorize(credentials) {
+      async authorize(credentials: any): any {
         const { email, password } = credentials as {
           email: string;
           password: string;
@@ -18,7 +19,6 @@ export const authOptions: AuthOptions = {
             email,
           },
         });
-        console.log(userFound);
 
         if (!userFound) {
           throw new Error("usuario y contraseña incorrectos");
@@ -28,8 +28,6 @@ export const authOptions: AuthOptions = {
           password,
           userFound.password
         );
-
-        console.log(matchPassword);
 
         if (!matchPassword) {
           throw new Error("usuario y contraseña no validos");

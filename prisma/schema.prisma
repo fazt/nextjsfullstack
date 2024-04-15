@@ -73,7 +73,7 @@ model User {
   email           String    @unique
   password        String
   confirmed_email Boolean?  @default(false)
-  role            String?   @default("user")
+  role            String?   @default("user") // admin
   created_at      DateTime  @default(now())
   products        Product[]
 }

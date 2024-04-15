@@ -19,8 +19,6 @@ function LoginForm() {
   const router = useRouter();
 
   const onSubmit = handleSubmit(async (data) => {
-    console.log(data);
-
     const result = await signIn("credentials", {
       email: data.email,
       password: data.password,
@@ -35,8 +33,6 @@ function LoginForm() {
 
     router.push("/dashboard");
     router.refresh();
-
-    console.log(result);
   });
 
   return (

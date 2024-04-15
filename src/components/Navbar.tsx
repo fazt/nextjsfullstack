@@ -7,8 +7,6 @@ export const dynamic = "force-dynamic";
 
 async function Navbar() {
   const session = await getServerSession(authOptions);
-  console.log({ session });
-
   return (
     <nav className="flex justify-between px-20 bg-slate-300 py-2">
       {/* logo */}
@@ -20,14 +18,16 @@ async function Navbar() {
           <>
             {navbarRoutes.map(
               (route) =>
-                route.auth && (
+                route?.auth && (
                   <li key={route.href}>
                     <Link href={route.href}>{route.text}</Link>
                   </li>
                 )
             )}
 
-            <li>Hi {session?.user?.name} {session.user.lastname}!</li>
+            <li>
+              Hi {session?.user?.name} {session.user.lastname}!
+            </li>
           </>
         )}
 

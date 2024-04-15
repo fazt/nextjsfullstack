@@ -3,7 +3,7 @@ import { ButtonHTMLAttributes } from "react";
 import Link from "next/link";
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
-  href: string;
+  href?: string;
 }
 
 export function Button({ children, className, href, ...props }: Props) {
