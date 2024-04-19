@@ -5,6 +5,8 @@ import prisma from "@/libs/prisma";
 import { Button } from "@/components/ui";
 import CategoriesTable from "@/components/categories/CategoriesTable";
 
+export const dynamic = "force-dynamic";
+
 export default async function DashboardCategoriesPage() {
   const categories = await prisma.category.findMany();
   const session = await getServerSession(authOptions);

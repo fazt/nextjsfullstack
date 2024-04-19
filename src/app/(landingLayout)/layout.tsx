@@ -1,20 +1,10 @@
 "use client";
+
 import { useState } from "react";
 import { Dialog } from "@headlessui/react";
-import {
-  ArrowPathIcon,
-  Bars3Icon,
-  CloudArrowUpIcon,
-  FingerPrintIcon,
-  LockClosedIcon,
-  XMarkIcon,
-} from "@heroicons/react/24/outline";
-import { CheckIcon } from "@heroicons/react/20/solid";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { navbarRoutes } from "@/routes/navbarRoutes";
 import Link from "next/link";
-
-
-
 
 const footerNavigation = {
   solutions: [
@@ -43,7 +33,11 @@ const footerNavigation = {
   ],
 };
 
-export default function LandingLayout({children}) {
+interface Props {
+  children: React.ReactNode;
+}
+
+export default function LandingLayout({ children }: Props) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (

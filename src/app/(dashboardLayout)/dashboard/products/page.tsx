@@ -4,6 +4,8 @@ import { getServerSession } from "next-auth";
 import { Button } from "@/components/ui";
 import ProductTable from "@/components/products/ProductTable";
 
+export const dynamic = "force-dynamic";
+
 async function loadProducts() {
   const session = await getServerSession(authOptions);
   const products = await prisma.product.findMany({

@@ -7,6 +7,7 @@ export const dynamic = "force-dynamic";
 
 async function Navbar() {
   const session = await getServerSession(authOptions);
+
   return (
     <nav className="flex justify-between px-20 bg-slate-300 py-2">
       {/* logo */}

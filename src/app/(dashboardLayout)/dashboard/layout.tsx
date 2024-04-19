@@ -24,7 +24,11 @@ interface Props {
 export default function DashboardLayout({ children }: Props) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const pathname = usePathname();
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
+
+  if (status === "loading") {
+    return <div>Loading...</div>;
+  }
 
   return (
     <>
@@ -187,7 +191,7 @@ export default function DashboardLayout({ children }: Props) {
                   <ul role="list" className="-mx-2 space-y-1">
                     {dashboardRoutes.map(
                       (item) =>
-                        item.roles.includes(session?.user.role) && (
+                        item.roles.includes(session!.user.role) && (
                           <li key={item.text}>
                             <Link
                               href={item.href}

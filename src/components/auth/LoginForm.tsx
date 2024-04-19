@@ -52,7 +52,9 @@ function LoginForm() {
         <Label>Email</Label>
         <Input type="email" placeholder="Email" {...register("email")} />
         {errors.email && (
-          <p className="text-red-500 text-xs">{errors.email.message}</p>
+          <p className="text-red-500 text-xs">
+            {errors.email.message as string}
+          </p>
         )}
 
         <Label>Password</Label>
@@ -62,7 +64,9 @@ function LoginForm() {
           {...register("password")}
         />
         {errors.password && (
-          <p className="text-red-500 text-xs">{errors.password.message}</p>
+          <p className="text-red-500 text-xs">
+            {errors.password.message as string}
+          </p>
         )}
 
         <Button className="block mt-2 w-full" type="submit">

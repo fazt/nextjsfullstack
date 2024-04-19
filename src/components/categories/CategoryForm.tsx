@@ -29,7 +29,7 @@ function CategoryForm() {
       <Label>Nombre de la Categoría</Label>
       <Input {...register("name")} />
       {errors.name?.message && (
-        <p className="text-red-500">{errors.name?.message}</p>
+        <p className="text-red-500">{errors.name?.message as string}</p>
       )}
 
       <Label>Descripción de la Categoría</Label>

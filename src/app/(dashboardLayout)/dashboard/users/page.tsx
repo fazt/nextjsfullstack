@@ -5,6 +5,8 @@ import prisma from "@/libs/prisma";
 import { Button } from "@/components/ui";
 import UserTable from "@/components/users/UserTable";
 
+export const dynamic = "force-dynamic";
+
 export default async function DashboardUsersPage() {
   const users = await prisma.user.findMany();
   const session = await getServerSession(authOptions);

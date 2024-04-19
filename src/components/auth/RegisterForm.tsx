@@ -27,8 +27,6 @@ function RegisterForm() {
     });
 
     if (!response.ok) {
-      const data = await response.json();
-      console.log(data);
       return;
     }
 
@@ -38,8 +36,7 @@ function RegisterForm() {
       redirect: false,
     });
 
-    if (resSignin.error) {
-      console.log(resSignin.error);
+    if (resSignin?.error) {
       return;
     }
 
@@ -55,19 +52,25 @@ function RegisterForm() {
         <Label>Name</Label>
         <Input type="text" placeholder="Name" {...register("name")} />
         {errors.name && (
-          <p className="text-red-500 text-xs">{errors.name.message}</p>
+          <p className="text-red-500 text-xs">
+            {errors.name.message as string}
+          </p>
         )}
 
         <Label>Lastname</Label>
         <Input type="text" placeholder="Lastname" {...register("lastname")} />
         {errors.lastname && (
-          <p className="text-red-500 text-xs">{errors.lastname.message}</p>
+          <p className="text-red-500 text-xs">
+            {errors.lastname.message as string}
+          </p>
         )}
 
         <Label>Email</Label>
         <Input type="email" placeholder="Email" {...register("email")} />
         {errors.email && (
-          <p className="text-red-500 text-xs">{errors.email.message}</p>
+          <p className="text-red-500 text-xs">
+            {errors.email.message as string}
+          </p>
         )}
 
         <Label>Password</Label>
@@ -77,7 +80,7 @@ function RegisterForm() {
           {...register("password")}
         />
         {errors.password && (
-          <p className="text-red-500 text-xs">{errors.password.message}</p>
+          <p className="text-red-500 text-xs">{errors.password.message as string}</p>
         )}
 
         <Button className="block mt-2 w-full" type="submit">

@@ -8,7 +8,6 @@ interface Props {
 }
 
 function ProductTable({ products }: Props) {
-  console.log(products);
   const columns = [
     {
       header: "Nombre",
@@ -52,4 +51,5 @@ function ProductTable({ products }: Props) {
 
   return <Table data={products} columns={columns} />;
 }
+
 export default ProductTable;

@@ -1,5 +1,6 @@
 "use client";
 import { Product, User } from "@prisma/client";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 interface Props {
@@ -20,10 +21,12 @@ function ProductCard({ product }: Props) {
       }}
     >
       <div className="aspect-h-4 aspect-w-3 bg-gray-200 sm:aspect-none group-hover:opacity-75 sm:h-96">
-        <img
-          src={product?.image}
-          // alt={product.image}
+        <Image
+          src={product?.image || ""}
           className="h-full w-full object-cover object-center sm:h-full sm:w-full"
+          alt={product.name}
+          width={300}
+          height={300}
         />
       </div>
       <div className="flex flex-1 flex-col space-y-2 p-4">
@@ -35,10 +38,12 @@ function ProductCard({ product }: Props) {
             </a>
           </h3>
           <div>
-            <img
+            <Image
               className="inline-block h-12 w-12 rounded-full"
               src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
               alt=""
+              width={48}
+              height={48}
             />
             <span>{product.author.name}</span>
           </div>
