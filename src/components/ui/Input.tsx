@@ -6,7 +6,7 @@ export const Input = forwardRef<
   React.InputHTMLAttributes<HTMLInputElement>
 >((props, ref) => {
   return (
-    <input className="bg-slate-200 rounded px-2 py-1" {...props} ref={ref} />
+    <input className="bg-slate-200 rounded px-2 py-2 mb-2" {...props} ref={ref} />
   );
 });
 

@@ -6,10 +6,11 @@ Table User {
   id Int [pk, increment]
   name String [not null]
   lastname String [not null]
-  role String [not null]
-  email String [not null]
+  role String [default: 'user']
+  email String [unique, not null]
   password String [not null]
-  confirmed String [not null]
+  create_at DateTime [default: `now()`, not null]
+  confirmed Boolean [default: false]
   products Product [not null]
   createdAt DateTime [default: `now()`, not null]
 }
@@ -19,11 +20,13 @@ Table Product {
   name String [not null]
   description String [not null]
   price Float [not null]
+  stock Int [default: 0]
   image String [not null]
+  slug String [unique]
   categoryId Int
   category Category
-  authorId Int
-  author User
+  userId Int [not null]
+  user User [not null]
   createdAt DateTime [default: `now()`, not null]
 }
 
@@ -37,4 +40,4 @@ Table Category {
 
 Ref: Product.categoryId > Category.id
 
-Ref: Product.authorId > User.id
+Ref: Product.userId > User.id

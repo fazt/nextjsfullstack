@@ -18,14 +18,15 @@ generator dbml {
 }
 
 model User {
-  id       Int    @id @default(autoincrement())
-  name     String
-  lastname String
-  role     String
-  email    String
-  password String
+  id        Int    @id @default(autoincrement())
+  name      String
+  lastname  String
+  role      String? @default("user")
+  email     String  @unique
+  password  String
+  create_at DateTime @default(now())
 
-  confirmed String
+  confirmed Boolean? @default(false)
 
   products Product[]
 
@@ -37,13 +38,15 @@ model Product {
   name        String
   description String
   price       Float
+  stock       Int?  @default(0)
   image       String
+  slug        String?  @unique @default(cuid())
 
   categoryId Int?
   category   Category? @relation(fields: [categoryId], references: [id])
 
-  authorId Int?
-  author   User? @relation(fields: [authorId], references: [id])
+  userId Int
+  user   User @relation(fields: [userId], references: [id])
 
   createdAt DateTime @default(now())
 }
