@@ -4,3 +4,4 @@ export { Label } from "./Label";
 export { Modal } from "./Modal";
 export { Input } from "./Input";
 export { Table } from "./Table";
+export { Avatar } from "./Avatar";

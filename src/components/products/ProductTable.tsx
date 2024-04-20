@@ -1,7 +1,7 @@
 "use client";
 
 import { Product } from "@prisma/client";
-import { Button, Table } from "../ui";
+import { Avatar, Button, Table } from "../ui";
 
 interface Props {
   products: Product[];
@@ -24,6 +24,10 @@ function ProductTable({ products }: Props) {
     {
       header: "Imagen",
       accessorKey: "image",
+      cell: (info) => {
+        const { image } = info.row.original;
+        return <Avatar src={image} alt="imagen" />;
+      },
     },
     {
       header: "URL",

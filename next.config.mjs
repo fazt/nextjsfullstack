@@ -11,6 +11,9 @@ const nextConfig = {
       {
         hostname: "store.sony.com.co",
       },
+      {
+        hostname: "res.cloudinary.com",
+      },
     ],
   },
   typescript: {

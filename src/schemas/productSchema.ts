@@ -18,7 +18,8 @@ export const createProductSchema = z.object({
     },
     { message: "El precio debe ser un número" }
   ),
-  image: z.string().url().optional(),
+  // nodelist instance
+  image: z.instanceof(FileList),
   slug: z
     .string()
     .min(1, {
