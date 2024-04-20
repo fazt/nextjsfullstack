@@ -12,6 +12,7 @@ interface Props {
 }
 
 export function Table({ data, columns }: Props) {
+  
   const table = useReactTable({
     data,
     columns,

@@ -1,23 +1,35 @@
+'use client'
 import { Category } from "@prisma/client";
-import { Table } from "../ui";
+import { Button, Table } from "../ui";
 
 interface Props {
   categories: Category[];
 }
 
 function CategoriesTable({ categories }: Props) {
+  
   const columns = [
     {
       header: "Nombre",
-      accessor: "name",
+      accessorKey: "name",
     },
     {
       header: "Descripción",
-      accessor: "description",
+      accessorKey: "description",
+    },
+    {
+      header: "Created at",
+      accessorKey: "created_at",
     },
     {
       header: "Acciones",
-      accessor: "actions",
+      cell: () => {
+        return (
+          <div className="flex gap-x-2">
+            <Button href="/dashboard/products/edit">Editar Categoria</Button>
+          </div>
+        );
+      },
     },
   ];
 

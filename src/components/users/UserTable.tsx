@@ -35,7 +35,7 @@ function UserTable({ users }: Props) {
         return (
           <div className="flex gap-x-2">
             <Button>Editar</Button>
-            <Button>Eliminar</Button>
+            <Button className="bg-red-500 hover:bg-red-700">Eliminar</Button>
           </div>
         );
       },

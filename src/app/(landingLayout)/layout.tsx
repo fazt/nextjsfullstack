@@ -102,10 +102,13 @@ export default function LandingLayout({ children }: Props) {
             <div className="flex items-center justify-between">
               <a href="#" className="-m-1.5 p-1.5">
                 <span className="sr-only">Your Company</span>
-                <img
+                <Image
                   className="h-8 w-auto"
                   src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
                   alt=""
+                  width={32}
+                  height={32}
+                  priority
                 />
               </a>
               <button
@@ -156,10 +159,12 @@ export default function LandingLayout({ children }: Props) {
             Footer
           </h2>
           <div className="xl:grid xl:grid-cols-3 xl:gap-8">
-            <img
+            <Image
               className="h-7"
               src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
               alt="Company name"
+              width={32}
+              height={32}
             />
             <div className="mt-16 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
               <div className="md:grid md:grid-cols-2 md:gap-8">

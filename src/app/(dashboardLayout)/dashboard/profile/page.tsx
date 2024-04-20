@@ -6,8 +6,11 @@ export const dynamic = "force-dynamic";
 async function PageProfile() {
   const session = await getServerSession(authOptions);
 
-  return <div>
-    profile
-  </div>;
+  return (
+    <div className="text-center py-10">
+       <h1 className="text-2xl text-white font-bold">{session?.user?.name}</h1>
+       <h2 className="text-2xl text-white font-bold">{session?.user?.email}</h2>
+    </div>
+  )
 }
 export default PageProfile;

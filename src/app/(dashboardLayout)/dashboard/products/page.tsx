@@ -10,7 +10,7 @@ async function loadProducts() {
   const session = await getServerSession(authOptions);
   const products = await prisma.product.findMany({
     where: {
-      authorId: session?.user.id,
+      authorId: Number(session?.user.id),
     },
   });
   return products;

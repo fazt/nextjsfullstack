@@ -100,7 +100,7 @@ export default function DashboardLayout({ children }: Props) {
                           <ul role="list" className="-mx-2 space-y-1">
                             {dashboardRoutes.map(
                               (item) =>
-                                item.roles.includes(session?.user.role) && (
+                                item.roles.includes(session!.user.role) && (
                                   <li key={item.text}>
                                     <Link
                                       href={item.href}

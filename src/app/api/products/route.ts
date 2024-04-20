@@ -18,8 +18,8 @@ export async function POST(request: Request) {
       description: data.description,
       price: parseFloat(data.price),
       image: data.image,
-      authorId: session.user.id,
-      // categoryId: data.categoryId,
+      authorId: Number(session.user.id),
+      categoryId: data.categoryId,
     },
   });
   return NextResponse.json(newProduct);
