@@ -12,6 +12,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
+  // create a new product
   const newProduct = await prisma.product.create({
     data: {
       name: data.name,
@@ -19,8 +20,17 @@ export async function POST(request: Request) {
       price: parseFloat(data.price),
       image: data.image,
       authorId: Number(session.user.id),
-      categoryId: data.categoryId,
     },
   });
+
+  await prisma.productCategory.createMany({
+    data: data.categories.map((categoryId: number) => {
+      return {
+        productId: newProduct.id,
+        categoryId,
+      };
+    }),
+  });
+
   return NextResponse.json(newProduct);
 }

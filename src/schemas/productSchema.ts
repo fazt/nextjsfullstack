@@ -26,6 +26,9 @@ export const createProductSchema = z.object({
       message: "El slug debe tener al menos 1 caracter",
     })
     .max(255),
+  categories: z.array(z.number()).min(1, {
+    message: "Selecciona al menos una categoría",
+  }),
   // categoryId
   // authord
 });

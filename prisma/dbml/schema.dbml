@@ -5,36 +5,47 @@
 Table User {
   id Int [pk, increment]
   name String [not null]
-  lastname String [not null]
-  role String [not null]
-  email String [not null]
+  last_name String [not null]
+  email String [unique, not null]
   password String [not null]
-  confirmed String [not null]
+  confirmed_email Boolean [default: false]
+  role String [default: 'user']
+  created_at DateTime [default: `now()`, not null]
   products Product [not null]
-  createdAt DateTime [default: `now()`, not null]
-}
-
-Table Product {
-  id Int [pk, increment]
-  name String [not null]
-  description String [not null]
-  price Float [not null]
-  image String [not null]
-  categoryId Int
-  category Category
-  authorId Int
-  author User
-  createdAt DateTime [default: `now()`, not null]
 }
 
 Table Category {
   id Int [pk, increment]
   name String [not null]
   description String [not null]
-  published Boolean [not null]
-  products Product [not null]
+  created_at DateTime [default: `now()`, not null]
+  products ProductCategory [not null]
 }
 
-Ref: Product.categoryId > Category.id
+Table Product {
+  id Int [pk, increment]
+  name String [not null]
+  price Float [not null]
+  description String
+  stock Int [default: 0]
+  image String
+  slug String [unique]
+  authorId Int [not null]
+  author User [not null]
+  created_at DateTime [default: `now()`, not null]
+  categories ProductCategory [not null]
+}
+
+Table ProductCategory {
+  id Int [pk, increment]
+  productId Int [not null]
+  product Product [not null]
+  categoryId Int [not null]
+  category Category [not null]
+}
 
 Ref: Product.authorId > User.id
+
+Ref: ProductCategory.productId > Product.id
+
+Ref: ProductCategory.categoryId > Category.id

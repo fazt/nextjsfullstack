@@ -12,12 +12,20 @@ async function loadProducts() {
     where: {
       authorId: Number(session?.user.id),
     },
+    include: {
+      categories: {
+        include: {
+          category: true,
+        },
+      },
+    },
   });
   return products;
 }
 
 async function DashboardProductsPage() {
   const products = await loadProducts();
+  console.log(products)
 
   return (
     <div className="px-4 sm:px-6 lg:px-8">

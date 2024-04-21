@@ -2,6 +2,10 @@ generator client {
   provider = "prisma-client-js"
 }
 
+generator dbml {
+  provider = "prisma-dbml-generator"
+}
+
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
@@ -24,7 +28,8 @@ model Category {
   name        String
   description String
   created_at  DateTime  @default(now())
-  products    Product[]
+
+  products    ProductCategory[]
 }
 
 model Product {
@@ -36,11 +41,20 @@ model Product {
   image       String?
   slug        String? @unique @default(cuid())
 
-  categoryId Int?
-  category   Category? @relation(fields: [categoryId], references: [id])
-
   authorId Int
   author   User @relation(fields: [authorId], references: [id])
 
   created_at DateTime @default(now())
+
+  categories ProductCategory[]
+}
+
+model ProductCategory {
+  id         Int      @id @default(autoincrement())
+
+  productId  Int
+  product    Product  @relation(fields: [productId], references: [id])
+
+  categoryId Int
+  category   Category @relation(fields: [categoryId], references: [id])
 }

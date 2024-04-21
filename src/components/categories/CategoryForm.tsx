@@ -4,15 +4,17 @@ import { Button, Card, Input, Label } from "@/components/ui";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createCategorySchema } from "@/schemas/categorySchema";
+import { useRouter } from "next/navigation";
 
 function CategoryForm() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm({
     resolver: zodResolver(createCategorySchema),
   });
+  const router = useRouter();
 
   const onSubmit = handleSubmit(async (data) => {
     await fetch("/api/categories", {
@@ -22,6 +24,9 @@ function CategoryForm() {
         "Content-Type": "application/json",
       },
     });
+
+    router.push("/dashboard/categories");
+    router.refresh();
   });
 
   return (
@@ -39,7 +44,9 @@ function CategoryForm() {
         <Label>Publicado</Label>
         <Input type="checkbox" {...register("published")} />
 
-        <Button className="block mt-2">Crear Categoría</Button>
+        <Button className="block mt-2" disabled={isSubmitting}>
+          {isSubmitting ? "Enviando..." : "Crear Categoría"}
+        </Button>
       </form>
     </Card>
   );
