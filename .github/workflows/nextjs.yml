@@ -76,3 +76,7 @@ jobs:
           echo CLOUDINARY_API_KEY=${{ secrets.CLOUDINARY_API_KEY }} >> .env
       - name: Build with Next.js
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
+      - name: install pm2
+        run: npm install pm2
+      - name: Run pm2
+        run: ${{ steps.detect-package-manager.outputs.runner }} pm2 start npm --name "nextjs" -- start
