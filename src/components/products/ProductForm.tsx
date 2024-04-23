@@ -1,7 +1,7 @@
 "use client";
 
-import { Input, Label, Button, Card } from "@/components/ui";
-import { useForm } from "react-hook-form";
+import { Input, Label, Button, Card, QuillEditor } from "@/components/ui";
+import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createProductSchema } from "@/schemas/productSchema";
 import { toast } from "sonner";
@@ -14,7 +14,7 @@ interface Props {
 }
 
 function ProductForm({ categories }: Props) {
-  const { register, handleSubmit, watch, setValue } = useForm({
+  const { control ,register, handleSubmit, watch, setValue } = useForm({
     resolver: zodResolver(createProductSchema),
     defaultValues: {
       name: "",
@@ -63,7 +63,12 @@ function ProductForm({ categories }: Props) {
         <Input {...register("name")} />
 
         <Label>Descripción</Label>
-        <Input {...register("description")} />
+        <Controller
+          name="description"
+          control={control}
+          render={({ field }) => <QuillEditor {...field} />}
+        />
+
 
         <Label>Precio</Label>
         <Input {...register("price")} type="number" defaultValue={0} />
