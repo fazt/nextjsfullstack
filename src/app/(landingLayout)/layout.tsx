@@ -6,6 +6,7 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { navbarRoutes } from "@/routes/navbarRoutes";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 const footerNavigation = {
   solutions: [
@@ -40,6 +41,8 @@ interface Props {
 
 export default function LandingLayout({ children }: Props) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const pathname = usePathname();
 
   return (
     <div className="bg-white">
@@ -76,7 +79,7 @@ export default function LandingLayout({ children }: Props) {
               <Link
                 key={item.text}
                 href={item.href}
-                className="text-sm font-semibold leading-6 text-gray-900"
+                className={pathname === item.href ? "text-md font-semibold leading-6 text-gray-900 underline underline-offset-4": 'ext-md font-semibold leading-6 text-gray-900'}
               >
                 {item.text}
               </Link>
@@ -85,7 +88,7 @@ export default function LandingLayout({ children }: Props) {
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
             <Link
               href="/auth/login"
-              className="text-sm font-semibold leading-6 text-gray-900"
+              className="text-md font-semibold leading-6 text-gray-900"
             >
               Log in <span aria-hidden="true">&rarr;</span>
             </Link>
