@@ -3,5 +3,7 @@ interface Props {
 }
 
 export function Label({ children }: Props) {
-  return <label className="block text-sm text-slate-700">{children}</label>;
+  return (
+    <label className="text-md block mb-2 font-semibold">{children}</label>
+  )
 }

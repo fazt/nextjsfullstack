@@ -15,6 +15,9 @@ const nextConfig = {
       {
         hostname: "res.cloudinary.com",
       },
+      {
+        hostname: 'readymadeui.com'
+      }
     ],
   },
   typescript: {
