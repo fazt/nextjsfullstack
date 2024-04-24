@@ -8,7 +8,6 @@ export const metadata: Metadata = {
 
 async function ProductPage() {
   const categories = await prisma.category.findMany();
-  console.log(categories);
 
   return (
     <>

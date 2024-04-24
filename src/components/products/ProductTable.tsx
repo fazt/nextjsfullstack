@@ -53,10 +53,10 @@ function ProductTable({ products }: Props) {
       header: "Imagen",
       accessorKey: "image",
       cell: (info: any) => {
-        const { image } = info.row.original;
-        return <Avatar src={image} alt="imagen" />;
+        return <Avatar src={info.row.original.image} alt="imagen" />;
       },
     },
+    //
     {
       header: "URL",
       accessorKey: "slug",
