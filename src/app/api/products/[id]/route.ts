@@ -16,13 +16,9 @@ export async function PUT(request: Request, { params: { id } }: Params) {
       where: {
         id: Number(id),
       },
-      data: {
-        name: data.name,
-        description: data.description,
-        price: parseFloat(data.price),
-        image: data.image,
-      },
+      data: data
     });
+
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       return NextResponse.json("Failed to update product", { status: 400 });

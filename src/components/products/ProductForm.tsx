@@ -7,13 +7,16 @@ import { createProductSchema } from "@/schemas/productSchema";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import Select from "react-select";
-import { Category } from "@prisma/client";
+import { Category, Product } from "@prisma/client";
+import Image from "next/image";
 
 interface Props {
   categories: Category[];
+  productId: Product;
 }
 
-function ProductForm({ categories }: Props) {
+function ProductForm({ categories, productId }: Props) {
+  
   const { register, handleSubmit, watch, setValue } = useForm({
     resolver: zodResolver(createProductSchema),
     defaultValues: {
@@ -54,27 +57,28 @@ function ProductForm({ categories }: Props) {
     toast.success("Producto creado");
   });
 
-  console.log(categories);
-
   return (
     <Card>
       <form onSubmit={onSubmit}>
         <Label>Nombre del Producto</Label>
-        <Input {...register("name")} />
+        <Input value={productId.name as string} {...register("name")} />
 
         <Label>Descripción</Label>
-        <Input {...register("description")} />
+        <Input value={productId.description as string} {...register("description")} />
 
         <Label>Precio</Label>
-        <Input {...register("price")} type="number" defaultValue={0} />
+        <Input value={productId.price} {...register("price")} type="number" defaultValue={0} />
 
         <Label>Imagen</Label>
         <Input type="file" {...register("image")} />
 
         {watch("image")?.length && (
-          <img
+          <Image
             src={URL.createObjectURL(watch("image")[0])}
             className="w-20 h-20"
+            alt="product image"
+            width={100}
+            height={100}
           />
         )}
 
