@@ -6,13 +6,29 @@ export const metadata: Metadata = {
   title: "Nextfull - Crear Producto",
 };
 
-async function ProductPage() {
+interface Params {
+  params: {
+    id: string;
+  };
+}
+async function ProductPage({params}: Params) {
+
+  const id = params.id;
+  
   const categories = await prisma.category.findMany();
-  console.log(categories);
+
+  const productId = await prisma.product.findUnique({
+    where: {
+      id: Number(id),
+    }
+  })
 
   return (
     <>
-      <ProductForm categories={categories} />
+      <ProductForm
+        productId={productId}
+        categories={categories} 
+      />
     </>
   );
 }

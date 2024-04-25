@@ -53,10 +53,10 @@ function ProductTable({ products }: Props) {
       header: "Imagen",
       accessorKey: "image",
       cell: (info: any) => {
-        const { image } = info.row.original;
-        return <Avatar src={image} alt="imagen" />;
+        return <Avatar src={info.row.original.image} alt="imagen" />;
       },
     },
+    //
     {
       header: "URL",
       accessorKey: "slug",
@@ -90,7 +90,7 @@ function ProductTable({ products }: Props) {
         const { id } = info.row.original;
         return (
           <div className="flex gap-x-2">
-            <Button href="/dashboard/products/edit">Editar Producto</Button>
+            <Button href={`/dashboard/products/edit/${id}`}>Editar Producto</Button>
             <Button
               className="bg-red-500 hover:bg-red-600"
               onClick={() => {

@@ -8,6 +8,24 @@ interface Params {
   };
 }
 
+export async function PUT(request: Request, { params: { id } }: Params) {
+  try {
+    const data = await request.json();
+
+    await prisma.product.update({
+      where: {
+        id: Number(id),
+      },
+      data: data
+    });
+
+  } catch (error) {
+    if (error instanceof Prisma.PrismaClientKnownRequestError) {
+      return NextResponse.json("Failed to update product", { status: 400 });
+    }
+  }
+}
+
 export async function DELETE(request: Request, { params: { id } }: Params) {
   try {
     await prisma.product.delete({

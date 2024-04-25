@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
+    dangerouslyAllowSVG: true,
     remotePatterns: [
       {
         hostname: "tailwindui.com",
@@ -14,6 +15,9 @@ const nextConfig = {
       {
         hostname: "res.cloudinary.com",
       },
+      {
+        hostname: 'readymadeui.com'
+      }
     ],
   },
   typescript: {

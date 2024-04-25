@@ -14,9 +14,9 @@ export function Avatar({ src, alt = "" }: Props) {
       <Image
         src={src || ""}
         alt={alt}
-        width={400}
-        height={400}
-        className="inline-block h-12 w-12 rounded-full"
+        width={100}
+        height={100}
+        className="inline-block h-20 w-20 rounded-full"
       />
     </Zoom>
   );

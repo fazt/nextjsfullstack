@@ -6,6 +6,7 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { navbarRoutes } from "@/routes/navbarRoutes";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 const footerNavigation = {
   solutions: [
@@ -41,6 +42,8 @@ interface Props {
 export default function LandingLayout({ children }: Props) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  const pathname = usePathname();
+
   return (
     <div className="bg-white">
       {/* Header */}
@@ -50,7 +53,7 @@ export default function LandingLayout({ children }: Props) {
           aria-label="Global"
         >
           <div className="flex lg:flex-1">
-            <a href="#" className="-m-1.5 p-1.5">
+            <Link href="/" className="-m-1.5 p-1.5">
               <span className="sr-only">Your Company</span>
               <Image
                 className="h-8 w-auto"
@@ -59,7 +62,7 @@ export default function LandingLayout({ children }: Props) {
                 width={32}
                 height={32}
               />
-            </a>
+            </Link>
           </div>
           <div className="flex lg:hidden">
             <button
@@ -76,7 +79,7 @@ export default function LandingLayout({ children }: Props) {
               <Link
                 key={item.text}
                 href={item.href}
-                className="text-sm font-semibold leading-6 text-gray-900"
+                className={pathname === item.href ? "text-md font-semibold leading-6 text-gray-900 underline underline-offset-4": 'ext-md font-semibold leading-6 text-gray-900'}
               >
                 {item.text}
               </Link>
@@ -85,7 +88,7 @@ export default function LandingLayout({ children }: Props) {
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
             <Link
               href="/auth/login"
-              className="text-sm font-semibold leading-6 text-gray-900"
+              className="text-md font-semibold leading-6 text-gray-900"
             >
               Log in <span aria-hidden="true">&rarr;</span>
             </Link>
