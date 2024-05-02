@@ -24,12 +24,12 @@ model User {
 }
 
 model Category {
-  id          Int       @id @default(autoincrement())
+  id          Int      @id @default(autoincrement())
   name        String
   description String
-  created_at  DateTime  @default(now())
+  created_at  DateTime @default(now())
 
-  products    ProductCategory[]
+  products ProductCategory[]
 }
 
 model Product {
@@ -40,9 +40,8 @@ model Product {
   stock       Int?    @default(0)
   image       String?
   slug        String? @unique @default(cuid())
-
-  authorId Int
-  author   User @relation(fields: [authorId], references: [id])
+  authorId    Int
+  author      User    @relation(fields: [authorId], references: [id])
 
   created_at DateTime @default(now())
 
@@ -50,10 +49,10 @@ model Product {
 }
 
 model ProductCategory {
-  id         Int      @id @default(autoincrement())
+  id Int @id @default(autoincrement())
 
-  productId  Int
-  product    Product  @relation(fields: [productId], references: [id])
+  productId Int
+  product   Product @relation(fields: [productId], references: [id])
 
   categoryId Int
   category   Category @relation(fields: [categoryId], references: [id])

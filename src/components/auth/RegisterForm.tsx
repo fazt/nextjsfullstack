@@ -6,6 +6,7 @@ import { registerSchema } from "@/schemas/authSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
+import Link from "next/link";
 
 function RegisterForm() {
   const {
@@ -49,21 +50,36 @@ function RegisterForm() {
       <form onSubmit={onSubmit} className="flex flex-col gap-y-2">
         <h3 className="text-2xl font-bold text-center mb-4">Register</h3>
 
-        <Label>Name</Label>
-        <Input type="text" placeholder="Name" {...register("name")} />
-        {errors.name && (
-          <p className="text-red-500 text-xs">
-            {errors.name.message as string}
-          </p>
-        )}
+        <div className="flex gap-x-2">
+          <div>
+            <Label>Name</Label>
+            <Input
+              type="text"
+              placeholder="Name"
+              {...register("name")}
+              autoFocus
+            />
+            {errors.name && (
+              <p className="text-red-500 text-xs">
+                {errors.name.message as string}
+              </p>
+            )}
+          </div>
 
-        <Label>Lastname</Label>
-        <Input type="text" placeholder="Lastname" {...register("lastname")} />
-        {errors.lastname && (
-          <p className="text-red-500 text-xs">
-            {errors.lastname.message as string}
-          </p>
-        )}
+          <div>
+            <Label>Lastname</Label>
+            <Input
+              type="text"
+              placeholder="Lastname"
+              {...register("lastname")}
+            />
+            {errors.lastname && (
+              <p className="text-red-500 text-xs">
+                {errors.lastname.message as string}
+              </p>
+            )}
+          </div>
+        </div>
 
         <Label>Email</Label>
         <Input type="email" placeholder="Email" {...register("email")} />
@@ -80,13 +96,22 @@ function RegisterForm() {
           {...register("password")}
         />
         {errors.password && (
-          <p className="text-red-500 text-xs">{errors.password.message as string}</p>
+          <p className="text-red-500 text-xs">
+            {errors.password.message as string}
+          </p>
         )}
 
         <Button className="block mt-2 w-full" type="submit">
           Register
         </Button>
       </form>
+
+      <p className="mt-4">
+        Already have an account?{" "}
+        <Link href="/auth/login" className="text-blue-500">
+          Login
+        </Link>
+      </p>
     </Card>
   );
 }

@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { signIn } from "next-auth/react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 function LoginForm() {
   const {
@@ -73,6 +74,12 @@ function LoginForm() {
           Login
         </Button>
       </form>
+      <p className="mt-4">
+        Don&apos;t have an account?{" "}
+        <Link href="/auth/register" className="text-blue-500">
+          Sign up
+        </Link>
+      </p>
     </Card>
   );
 }

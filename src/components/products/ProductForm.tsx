@@ -3,44 +3,49 @@
 import { Input, Label, Button, Card } from "@/components/ui";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { createProductSchema } from "@/schemas/productSchema";
+import {
+  CreateProductInput,
+  createProductSchema,
+} from "@/schemas/productSchema";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import Select from "react-select";
 import { Category } from "@prisma/client";
+import Image from "next/image";
 
 interface Props {
   categories: Category[];
 }
 
 function ProductForm({ categories }: Props) {
-  const { register, handleSubmit, watch, setValue } = useForm({
+  const {
+    register,
+    handleSubmit,
+    watch,
+    setValue,
+    formState: { errors },
+  } = useForm<CreateProductInput>({
     resolver: zodResolver(createProductSchema),
-    defaultValues: {
-      name: "",
-      description: "",
-      price: 0,
-      slug: "",
-      categories: null,
-      image: null || [],
-    },
   });
   const router = useRouter();
 
   const onSubmit = handleSubmit(async (data) => {
-
-    if (data.image && data.image.length > 0) {
+    if (data.image instanceof FileList && data.image.length) {
       const formData = new FormData();
       formData.append("file", data.image[0]);
+
       const result = await fetch("/api/upload", {
         method: "POST",
         body: formData,
       });
+
       const uploadData = await result.json();
       data.image = uploadData.secure_url;
     }
 
-    await fetch("/api/products", {
+    delete data.image;
+
+    const result = await fetch("/api/products", {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
@@ -55,6 +60,7 @@ function ProductForm({ categories }: Props) {
   });
 
   console.log(categories);
+  console.log(errors);
 
   return (
     <Card>
@@ -71,10 +77,13 @@ function ProductForm({ categories }: Props) {
         <Label>Imagen</Label>
         <Input type="file" {...register("image")} />
 
-        {watch("image")?.length && (
-          <img
-            src={URL.createObjectURL(watch("image")[0])}
+        {watch("image") instanceof FileList && watch("image")?.length && (
+          <Image
+            src={URL.createObjectURL(watch("image")?[0])}
+            alt="Product Image"
             className="w-20 h-20"
+            width={80}
+            height={80}
           />
         )}
 

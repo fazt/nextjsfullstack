@@ -1,5 +1,26 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+## Install Development Environment
+
+Create a postgres database and run the following SQL script:
+
+```
+docker compose up -d
+```
+
+```bash
+git clone git@github.com:fazt/nextjsfullstack.git
+cd nextjsfullstack
+npm install
+```
+
+## Install Production Environment
+
+```bash
+npm run build
+```
+
+
 ## Getting Started
 
 First, run the development server:

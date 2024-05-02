@@ -19,16 +19,16 @@ export const createProductSchema = z.object({
     { message: "El precio debe ser un número" }
   ),
   // nodelist instance
-  image: z.instanceof(FileList),
+  image: z.instanceof(FileList).optional(),
   slug: z
     .string()
     .min(1, {
       message: "El slug debe tener al menos 1 caracter",
     })
     .max(255),
-  categories: z.array(z.number()).min(1, {
-    message: "Selecciona al menos una categoría",
-  }),
+  categories: z.array(z.number()).optional(),
   // categoryId
   // authord
 });
+
+export type CreateProductInput = z.infer<typeof createProductSchema>;
