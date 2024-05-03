@@ -1,7 +1,7 @@
 "use client";
 
-import { Input, Label, Button, Card } from "@/components/ui";
-import { useForm } from "react-hook-form";
+import { Input, Label, Button, Card, QuillEditor } from "@/components/ui";
+import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   CreateProductInput,
@@ -18,15 +18,10 @@ interface Props {
 }
 
 function ProductForm({ categories }: Props) {
-  const {
-    register,
-    handleSubmit,
-    watch,
-    setValue,
-    formState: { errors },
-  } = useForm<CreateProductInput>({
-    resolver: zodResolver(createProductSchema),
-  });
+  const { control, register, handleSubmit, watch, setValue } =
+    useForm<CreateProductInput>({
+      resolver: zodResolver(createProductSchema),
+    });
   const router = useRouter();
 
   const onSubmit = handleSubmit(async (data) => {
@@ -60,7 +55,6 @@ function ProductForm({ categories }: Props) {
   });
 
   console.log(categories);
-  console.log(errors);
 
   return (
     <Card>
@@ -69,7 +63,11 @@ function ProductForm({ categories }: Props) {
         <Input {...register("name")} />
 
         <Label>Descripción</Label>
-        <Input {...register("description")} />
+        <Controller
+          name="description"
+          control={control}
+          render={({ field }) => <QuillEditor {...field} />}
+        />
 
         <Label>Precio</Label>
         <Input {...register("price")} type="number" defaultValue={0} />
@@ -77,9 +75,9 @@ function ProductForm({ categories }: Props) {
         <Label>Imagen</Label>
         <Input type="file" {...register("image")} />
 
-        {watch("image") instanceof FileList && watch("image")?.length && (
+        {watch("image") instanceof FileList && watch("image") && (
           <Image
-            src={URL.createObjectURL(watch("image")?[0])}
+            src={URL.createObjectURL(watch("image")[0] as any)}
             alt="Product Image"
             className="w-20 h-20"
             width={80}

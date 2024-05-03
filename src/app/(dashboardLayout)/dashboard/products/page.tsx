@@ -23,9 +23,8 @@ async function loadProducts() {
   return products;
 }
 
-async function DashboardProductsPage() {
+export default async function DashboardProductsPage() {
   const products = await loadProducts();
-  console.log(products)
 
   return (
     <div className="px-4 sm:px-6 lg:px-8">
@@ -52,5 +51,3 @@ async function DashboardProductsPage() {
     </div>
   );
 }
-
-export default DashboardProductsPage;
