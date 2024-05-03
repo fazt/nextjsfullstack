@@ -40,7 +40,7 @@ function ProductForm({ categories }: Props) {
 
     delete data.image;
 
-    const result = await fetch("/api/products", {
+    await fetch("/api/products", {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
